@@ -7,7 +7,8 @@ generateError();
 type User = {
   name: string;
   age: number;
-  role?: "admin" | "reader";
+  role?: 'admin' | 'guest'
 };
 
-let input = "";
+let input = '';
+const didProvideInput = input ?? false;
