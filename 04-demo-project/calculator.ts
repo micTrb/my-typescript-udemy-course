@@ -21,7 +21,10 @@ type InvestmentResult = {
 type CalculationResult = InvestmentResult[] | string;
 
 function calculateInvestment(data: InvestmentData): CalculationResult {
+  // object destructuring
   const { initialAmount, annualContribution, expectedReturn, duration } = data;
+
+  // checks
   if (initialAmount < 0) {
     return "Initial Investment Amount must be at least zero";
   }
@@ -35,12 +38,14 @@ function calculateInvestment(data: InvestmentData): CalculationResult {
   }
 
   let total = initialAmount;
-  let totalContributions = 0;
-  let totalInterestEarned = 0;
+  let totalContributions = 0; //total contributions
+  let totalInterestEarned = 0; //total interest earned new value to be incremented
 
   const annualResults: InvestmentResult[] = [];
 
+  //loop throught each year
   for (let i = 0; i < duration; i++) {
+    //updating local variables
     total = total * (1 + expectedReturn);
     totalInterestEarned = total - totalContributions - initialAmount;
     totalContributions = totalContributions + annualContribution;
@@ -56,8 +61,32 @@ function calculateInvestment(data: InvestmentData): CalculationResult {
   return annualResults;
 } // => result[]
 
-function printResults(results) {
-  // print (output) the result data
+function printResults(results: CalculationResult) {
+  if (typeof results === "string") {
+    console.log(results);
+    return;
+  }
+
+  for (const yearEndResult of results) {
+    console.log(yearEndResult.year);
+    console.log(`Total: ${yearEndResult.totalAmount.toFixed(0)}`);
+    console.log(
+      `Total Contributions: ${yearEndResult.totalContributions.toFixed(0)}`,
+    );
+    console.log(
+      `Total Interest Earned: ${yearEndResult.totalInterestEarned.toFixed(0)}`,
+    );
+    console.log("----------------------");
+  }
 }
 
-const results = calculateInvestment(data);
+const investmentData: InvestmentData = {
+  initialAmount: 10000,
+  annualContribution: 1000,
+  expectedReturn: 0.2,
+  duration: 15,
+};
+
+const results = calculateInvestment(investmentData);
+
+printResults(results);
