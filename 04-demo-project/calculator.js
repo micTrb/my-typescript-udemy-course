@@ -54,9 +54,8 @@ function printResults(results) {
 const investmentData = {
     initialAmount: 10000,
     annualContribution: 1000,
-    expectedReturn: 0.1,
+    expectedReturn: 0.2,
     duration: 15,
 };
 const results = calculateInvestment(investmentData);
 printResults(results);
-//# sourceMappingURL=calculator.js.map
