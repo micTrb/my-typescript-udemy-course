@@ -1,8 +1,12 @@
 class ListNode {}
 
-class LinkedList {
+class LinkedList<T> {
   private root?: ListNode;
   private length = 0;
+
+  //add using a generic tyoe
+  add(value: T) {}
 }
 
-const list = new LinkedList();
+const numberList = new LinkedList<number>();
+const nameList = new LinkedList<string>();
